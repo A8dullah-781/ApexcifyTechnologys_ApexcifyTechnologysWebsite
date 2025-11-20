@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+
+html, body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  cursor: none;
+}
+@keyframes moveAnimation {
+    from{
+        transform: translateX(0);
+    }
+
+    to{
+        transform: translateX(-60%);
+    }
+}
+
+.moveX{
+    animation-name: moveAnimation;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.bg-box {
+  width: full;
+  height: full;
+  background-image: url("your-image.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+
+.custom-cursor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+   transition: opacity 0.2s ease;
+  z-index: 9999;
+  backdrop-filter: invert(1);
+}
+
+
+@media (min-width:381px) and (max-width:520px) {
+  .marginn {
+    margin-top: 25vh;
+  }
+}
+@media (min-width:1px) and (max-width:380px) {
+  .marginn {
+    margin-top: 40vh;
+  }
+}
+
+@media (min-width:521px) and (max-width:600px) {
+  .marginn {
+    margin-top: 65vh;
+  }
+}
+@media (min-width:601px) and (max-width:1000px) {
+  .marginn {
+    margin-top: 35vh;
+  }
+}
