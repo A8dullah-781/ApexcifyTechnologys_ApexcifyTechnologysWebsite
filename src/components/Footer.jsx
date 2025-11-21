@@ -1,17 +1,23 @@
-import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { SiReact } from 'react-icons/si';
+import React from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { SiReact } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 
-        cursor-none text-gray-200 py-12 px-6 md:px-20">
+    <footer
+      className="bg-gray-900 
+        cursor-none text-gray-200 py-12 px-6 md:px-20"
+    >
       <div className="flex flex-col md:flex-row justify-between gap-10">
         
-        {/* Logo & Social Icons */}
         <div className="flex flex-col items-center md:items-start gap-4">
           <div className="flex items-center gap-2 text-3xl font-bold text-white">
-            <SiReact className="text-cyan-400 hover:shadow-[0_0_10px_cyan] transition-shadow duration-300 "/>
+            <SiReact className="text-cyan-400 hover:shadow-[0_0_10px_cyan] transition-shadow duration-300 " />
             Apexify
           </div>
           <div className="flex gap-4 mt-2">
@@ -22,25 +28,28 @@ const Footer = () => {
           </div>
         </div>
 
- <div className="flex justify-center 
-        cursor-none md:justify-start gap-6 flex-wrap">
-  {['Home', 'About', 'Services'].map((link) => (
-    <a
-      key={link}
-      href={`#${link.toLowerCase()}`}
-      className="relative group 
+        <div
+          className="flex justify-center 
+        cursor-none md:justify-start gap-6 flex-wrap"
+        >
+          {["Home", "About", "Services"].map((link) => (
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              className="relative group 
         cursor-none px-2 py-1 text-gray-200 hover:text-cyan-400 transition-colors"
-    >
-      {link}
-      {/* underline text ke bilkul neeche */}
-      <span className="absolute left-0 bottom-15 w-0 
-        cursor-none h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
-    </a>
-  ))}
-</div>
+            >
+              {link}
+          
+              <span
+                className="absolute left-0 bottom-15 w-0 
+        cursor-none h-[1px] bg-white transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+          ))}
+        </div>
 
-
-        {/* Contact Info */}
+       
         <div className="flex flex-col gap-2 text-center md:text-left">
           <div className="font-semibold text-xl mb-2">Contact</div>
           <div>+1 (682) 600-4502</div>

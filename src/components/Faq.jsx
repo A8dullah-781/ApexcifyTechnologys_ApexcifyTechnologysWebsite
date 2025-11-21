@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { faqs } from "../../constants/constants.js"; // path adjust kar
+import { faqs } from "../../constants/constants.js"; 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -31,7 +31,7 @@ const Faq = () => {
             start: "top 80%",
             toggleActions: "play none none none",
           },
-          delay: i * 0.1, // stagger effect
+          delay: i * 0.1, 
         }
       );
     });

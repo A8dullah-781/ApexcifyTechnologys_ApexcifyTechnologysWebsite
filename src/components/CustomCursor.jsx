@@ -12,8 +12,6 @@ const CustomCursor = () => {
 
     window.addEventListener("mousemove", move);
 
-    
-
     const follow = () => {
       cursorPos.current.x += (mousePos.current.x - cursorPos.current.x) * 0.18;
       cursorPos.current.y += (mousePos.current.y - cursorPos.current.y) * 0.18;

@@ -12,7 +12,7 @@ const Counter = ({ target = 100, duration = 2000 }) => {
           if (entry.isIntersecting && !hasStarted.current) {
             hasStarted.current = true;
             let start = 0;
-            const increment = target / (duration / 16); // roughly 60fps
+            const increment = target / (duration / 16); 
 
             const counter = setInterval(() => {
               start += increment;
@@ -26,7 +26,7 @@ const Counter = ({ target = 100, duration = 2000 }) => {
           }
         });
       },
-      { threshold: 0.5 } // jab element 50% visible ho
+      { threshold: 0.5 } 
     );
 
     if (ref.current) observer.observe(ref.current);

@@ -1,17 +1,22 @@
-import React from 'react';
+import React from "react";
 
 const Contact = () => {
   return (
-    <div id='contact' className="flex flex-col items-center justify-center py-10 px-6 md:px-20">
-      
-      {/* Main Container */}
+    <div
+      id="contact"
+      className="flex flex-col items-center justify-center py-10 px-6 md:px-20"
+    >
+     
       <div className="w-full flex flex-col lg:flex-row gap-10">
-        {/* Left Section */}
+      
         <div className="lg:w-1/2 sm:mt-15 my-5 flex flex-col gap-8">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="text-2xl sm:text-4xl font-bold mb-4">Contact Information</div>
+            <div className="text-2xl sm:text-4xl font-bold mb-4">
+              Contact Information
+            </div>
             <div className="text-gray-700">
-              Have questions or ready to start your project? Reach <br /> out to our team, and let’s bring your vision to life.
+              Have questions or ready to start your project? Reach <br /> out to
+              our team, and let’s bring your vision to life.
             </div>
           </div>
 
@@ -27,12 +32,14 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Right Section - Form */}
+        
         <div className="lg:w-1/2 px-5 bg-white  rounded-lg">
-        {/* Heading */}
-      <div className='flex justify-center items-center'>
-        <div className="font-bold text-2xl sm:text-4xl  pb-7 md:text-3xl">Send us a Message</div>
-      </div>
+      
+          <div className="flex justify-center items-center">
+            <div className="font-bold text-2xl sm:text-4xl  pb-7 md:text-3xl">
+              Send us a Message
+            </div>
+          </div>
 
           <form
             action="https://formsubmit.co/hmabdullahfarooq781@gmail.com"
@@ -80,9 +87,6 @@ const Contact = () => {
               </button>
             </div>
 
-            {/* FormSubmit Configuration */}
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
           </form>
         </div>
       </div>

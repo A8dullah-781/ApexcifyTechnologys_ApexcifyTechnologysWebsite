@@ -29,8 +29,8 @@ const Circle = ({ target = 90, color = "blue" }) => {
 
   return (
     <div
-  ref={circleRef}
-  className="
+      ref={circleRef}
+      className="
     relative bg-white
     w-[140px] h-[140px]
     sm:w-[160px] sm:h-[160px]
@@ -39,46 +39,46 @@ const Circle = ({ target = 90, color = "blue" }) => {
     xl:w-[220px] xl:h-[220px]
     rounded-full
   "
->
-  <svg
-    width="100%" height="100%"
-    viewBox="0 0 180 180"
-    className="absolute top-0 left-0"
-  >
-    <circle
-      cx="90"
-      cy="90"
-      r={radius}
-      stroke="#919191"
-      strokeWidth="10"
-      fill="none"
-    />
-    <circle
-      cx="90"
-      cy="90"
-      r={radius}
-      stroke={color}
-      strokeWidth="10"
-      fill="none"
-      strokeDasharray={circumference}
-      strokeDashoffset={circumference - progress}
-      strokeLinecap="round"
-      style={{ transition: "stroke-dashoffset 0.2s linear" }}
-      className="rotate-[-90deg] origin-[50%_50%]"
-    />
-  </svg>
+    >
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 180 180"
+        className="absolute top-0 left-0"
+      >
+        <circle
+          cx="90"
+          cy="90"
+          r={radius}
+          stroke="#919191"
+          strokeWidth="10"
+          fill="none"
+        />
+        <circle
+          cx="90"
+          cy="90"
+          r={radius}
+          stroke={color}
+          strokeWidth="10"
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={circumference - progress}
+          strokeLinecap="round"
+          style={{ transition: "stroke-dashoffset 0.2s linear" }}
+          className="rotate-[-90deg] origin-[50%_50%]"
+        />
+      </svg>
 
-  <div
-    className="
+      <div
+        className="
       absolute inset-0 flex justify-center items-center
       text-[5vw] sm:text-[4vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw]
       font-extrabold
     "
-  >
-    {percent}%
-  </div>
-</div>
-
+      >
+        {percent}%
+      </div>
+    </div>
   );
 };
 

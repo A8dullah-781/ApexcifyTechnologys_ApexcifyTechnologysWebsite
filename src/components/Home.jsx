@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import Navbar from "./Navbar";
 import { gsap } from "gsap";
-import  {useGSAP}  from "@gsap/react";
-
+import { useGSAP } from "@gsap/react";
 
 const Home = () => {
   gsap.registerPlugin(useGSAP);
@@ -29,14 +28,13 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     gsap.fromTo(
       textRef.current,
-      { y: 50, opacity: 0 }, // start: neeche aur invisible
-      { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" } // end: apni jagah aur visible
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" }
     );
-  }, []); 
- 
+  }, []);
 
   return (
     <div
@@ -52,7 +50,10 @@ const Home = () => {
       <div className="flex text-white pt-5 justify-center items-start">
         <div className="  flex lg:mt-15 mt-10 flex-col w-[90vw] lg:w-[80vw]">
           <div className=" gap-4  justify-center items-center flex flex-col h-full ">
-            <div ref={textRef} className=" flex textt justify-center text-center items-center flex-col">
+            <div
+              ref={textRef}
+              className=" flex textt justify-center text-center items-center flex-col"
+            >
               <div className="font-semibold md:leading-none text-[5vw] lg:text-[4.5vw] uppercase">
                 We create digital experiences{" "}
               </div>
