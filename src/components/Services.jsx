@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CgWebsite } from "react-icons/cg";
 import { MdOutlineAppShortcut } from "react-icons/md";
 import { MdOutlineDraw } from "react-icons/md";
 import { MdSupportAgent } from "react-icons/md";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 const Services = () => {
+gsap.registerPlugin(ScrollTrigger);
+  const textRef = useRef();
+
+useEffect(() => {
+    gsap.fromTo(
+      textRef.current,
+      { y: 50, opacity: 0 }, // start position
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: textRef.current, // element ko observe kar
+          start: "top 80%",        // jab element top 80% screen pe aaye
+          toggleActions: "play none none none", // ek baar play ho jaaye
+        },
+      }
+    );
+  }, []);
+
+
   return (
-    <div>
-      <div className="flex   flex-col justify-center items-center">
+    <div id="services">
+      <div ref={textRef} className="flex   flex-col justify-center items-center">
         <div className=" flex justify-center items-center pt-10 md:pt-25 pb-5 flex-col leading-none">
           <div className="font-bold text-[7vw] md:text-[4.5vw] uppercase ">
             We offer a wide range

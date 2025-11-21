@@ -7,22 +7,47 @@ const Navbar = () => {
   const mobileMenuRef = useRef(null);
   const desktopLinksRef = useRef([]);
   const lineRef = useRef(null);
+  const [showNav, setShowNav] = useState(true);
+const lastScrollY = useRef(0);
 
-  const links = ["Home", "About Us", "Services", "Contact Us"];
+useEffect(() => {
+  const handleScroll = () => {
+    const currentY = window.scrollY;
+
+    if (currentY > lastScrollY.current) {
+      // scrolling DOWN
+      setShowNav(false);
+    } else {
+      // scrolling UP
+      setShowNav(true);
+    }
+
+    lastScrollY.current = currentY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+  const links = [
+    { name: "Home", id: "home" },
+    { name: "About Us", id: "about" },
+    { name: "Services", id: "services" },
+    { name: "Contact Us", id: "contact" }
+  ];
 
   useEffect(() => {
-    // Animate desktop links & line on mount
     if (desktopLinksRef.current.length && lineRef.current) {
       const tl = gsap.timeline();
 
-      // Line animation: center se grow
       tl.fromTo(
         lineRef.current,
         { scaleX: 0, transformOrigin: "center" },
         { scaleX: 1, duration: 1, ease: "bounce.out" }
       );
 
-      // Staggered links animation
       tl.fromTo(
         desktopLinksRef.current,
         { y: -20, opacity: 0 },
@@ -31,36 +56,40 @@ const Navbar = () => {
           opacity: 1,
           stagger: 0.1,
           duration: 0.5,
-          ease: "bounce.out",
+          ease: "bounce.out"
         },
-        "-=0.3" // thoda overlap with line animation
+        "-=0.3"
       );
     }
   }, []);
 
   useEffect(() => {
-    // Mobile menu slide
     if (mobileMenuRef.current) {
       if (isOpen) {
         gsap.to(mobileMenuRef.current, {
           x: 0,
           opacity: 1,
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power2.out"
         });
       } else {
         gsap.to(mobileMenuRef.current, {
           x: "100%",
           opacity: 0,
           duration: 0.3,
-          ease: "power2.inOut",
+          ease: "power2.inOut"
         });
       }
     }
   }, [isOpen]);
 
   return (
-    <nav className="relative w-full text-white px-5 md:px-10 py-3 flex justify-between items-center">
+   <nav
+  className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300
+    ${showNav ? "translate-y-0" : "-translate-y-full"}
+    text-white px-5 md:px-10 py-3 flex justify-between items-center`}
+>
+
       {/* Animated Line */}
       <div
         ref={lineRef}
@@ -73,14 +102,15 @@ const Navbar = () => {
       {/* Desktop Links */}
       <div className="hidden md:flex py-5 items-center gap-8 text-[1.5vw] font-medium">
         {links.map((link, idx) => (
-          <div
-            key={link}
+          <a
+            key={link.id}
+            href={`#${link.id}`}
             ref={(el) => (desktopLinksRef.current[idx] = el)}
             className="relative group cursor-pointer"
           >
-            {link}
+            {link.name}
             <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -107,14 +137,16 @@ const Navbar = () => {
         style={{ x: "100%", opacity: 0 }}
       >
         {links.map((link) => (
-          <div
-            key={link}
+          <a
+            key={link.id}
+            href={`#${link.id}`}
             className="cursor-pointer border-b-1 w-[200px] text-center text-lg py-2"
             onClick={() => setIsOpen(false)}
           >
-            {link}
-          </div>
+            {link.name}
+          </a>
         ))}
+
         <button className="px-6 py-2 mt-2 border border-white text-white bg-transparent rounded-2xl transition duration-200 hover:shadow-[0_0_6px_#00eaff] hover:border-[#00eaff]">
           Let’s Talk
         </button>

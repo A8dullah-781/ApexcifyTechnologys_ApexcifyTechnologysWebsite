@@ -6,7 +6,7 @@ import Circle from "./Circle";
 
 const Aboutt = () => {
   return (
-    <div>
+    <div id='about'>
       <div>
          <div 
   className="mt-[10vh] w-full bg-no-repeat bg-cover bg-bottom overflow-x-hidden"
