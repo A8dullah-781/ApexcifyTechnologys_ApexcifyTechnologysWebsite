@@ -3,30 +3,40 @@ import { CgWebsite } from "react-icons/cg";
 import { MdOutlineAppShortcut } from "react-icons/md";
 import { MdOutlineDraw } from "react-icons/md";
 import { MdSupportAgent } from "react-icons/md";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Services = () => {
-  gsap.registerPlugin(ScrollTrigger);
   const textRef = useRef();
-
   useEffect(() => {
-    gsap.fromTo(
-      textRef.current,
-      { y: 50, opacity: 0 }, 
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: textRef.current, 
-          start: "top 80%", 
-          toggleActions: "play none none none", 
-        },
-      }
-    );
+    if (typeof window !== "undefined") {
+      (async () => {
+        const gsapModule = await import("gsap");
+        const { gsap } = gsapModule;
+
+        const scrollModule = await import("gsap/ScrollTrigger");
+        const { ScrollTrigger } = scrollModule;
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (textRef.current) {
+          gsap.fromTo(
+            textRef.current,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: textRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+      })();
+    }
   }, []);
+  
 
   return (
     <div id="services">

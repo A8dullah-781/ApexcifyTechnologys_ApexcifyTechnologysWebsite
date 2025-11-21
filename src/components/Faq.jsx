@@ -1,11 +1,43 @@
 import React, { useState, useRef, useEffect } from "react";
 import { faqs } from "../../constants/constants.js"; 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const Faq = () => {
+   useEffect(() => {
+    if (typeof window !== "undefined") {
+      (async () => {
+        const gsapModule = await import("gsap");
+        const { gsap } = gsapModule;
+
+        const scrollModule = await import("gsap/ScrollTrigger");
+        const { ScrollTrigger } = scrollModule;
+        gsap.registerPlugin(ScrollTrigger);
+
+        faqRefs.current.forEach((el, i) => {
+          if (!el) return;
+
+          gsap.fromTo(
+            el,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              ease: "power3.out",
+              delay: i * 0.1, // stagger
+              scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+      })();
+    }
+  }, []);
+
+
   const [openIndex, setOpenIndex] = useState(null);
   const faqRefs = useRef([]);
 
@@ -15,26 +47,7 @@ const Faq = () => {
   };
 
   useEffect(() => {
-    faqRefs.current.forEach((el, i) => {
-      if (!el) return;
-
-      gsap.fromTo(
-        el,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-          delay: i * 0.1, 
-        }
-      );
-    });
+    
   }, []);
 
   return (

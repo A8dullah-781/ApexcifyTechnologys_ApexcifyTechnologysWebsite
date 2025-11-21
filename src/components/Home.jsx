@@ -2,11 +2,29 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import Navbar from "./Navbar";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 
 const Home = () => {
-  gsap.registerPlugin(useGSAP);
+
+ useEffect(() => {
+    if (typeof window !== "undefined") {
+      (async () => {
+        const gsapModule = await import("gsap");
+        const { gsap } = gsapModule;
+
+        const scrollModule = await import("gsap/ScrollTrigger");
+        const { ScrollTrigger } = scrollModule;
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (textRef.current) {
+          gsap.fromTo(
+            textRef.current,
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" }
+          );
+        }
+      })();
+    }
+  }, []);
 
   const target = 276;
   const [count, setCount] = useState(0);
@@ -26,14 +44,6 @@ const Home = () => {
     }, 10);
 
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    gsap.fromTo(
-      textRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.5, ease: "power3.out" }
-    );
   }, []);
 
   return (

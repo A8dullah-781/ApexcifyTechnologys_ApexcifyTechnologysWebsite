@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
-import { gsap } from "gsap";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +8,44 @@ const Navbar = () => {
   const lineRef = useRef(null);
   const [showNav, setShowNav] = useState(true);
   const lastScrollY = useRef(0);
+
+   useEffect(() => {
+  if (typeof window !== "undefined") {
+    import("gsap").then((gsapModule) => {
+      const gsap = gsapModule.gsap;
+      import("gsap/ScrollTrigger").then((scrollModule) => {
+        const ScrollTrigger = scrollModule.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Yaha pe animations define karo
+        if (desktopLinksRef.current.length && lineRef.current) {
+          const tl = gsap.timeline();
+
+          tl.fromTo(
+            lineRef.current,
+            { scaleX: 0, transformOrigin: "center" },
+            { scaleX: 1, duration: 1, ease: "bounce.out" }
+          );
+
+          tl.fromTo(
+            desktopLinksRef.current,
+            { y: -20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.5,
+              ease: "bounce.out",
+            },
+            "-=0.3"
+          );
+        }
+      });
+    });
+  }
+}, []);
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,32 +73,14 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    if (desktopLinksRef.current.length && lineRef.current) {
-      const tl = gsap.timeline();
+  if (typeof window !== "undefined") {
+    import("gsap").then((gsapModule) => {
+      const gsap = gsapModule.gsap;
+      import("gsap/ScrollTrigger").then((scrollModule) => {
+        const ScrollTrigger = scrollModule.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
 
-      tl.fromTo(
-        lineRef.current,
-        { scaleX: 0, transformOrigin: "center" },
-        { scaleX: 1, duration: 1, ease: "bounce.out" }
-      );
-
-      tl.fromTo(
-        desktopLinksRef.current,
-        { y: -20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: "bounce.out",
-        },
-        "-=0.3"
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    if (mobileMenuRef.current) {
+     if (mobileMenuRef.current) {
       if (isOpen) {
         gsap.to(mobileMenuRef.current, {
           x: 0,
@@ -78,7 +97,13 @@ const Navbar = () => {
         });
       }
     }
-  }, [isOpen]);
+      });
+    });
+  }
+}, [isOpen]);
+
+
+  
 
   return (
     <nav
