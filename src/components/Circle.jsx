@@ -1,8 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Circle = ({ target = 90, color = "blue" }) => {
   const [percent, setPercent] = useState(0);
@@ -14,7 +10,20 @@ const Circle = ({ target = 90, color = "blue" }) => {
   const progress = (percent / 100) * circumference;
 
   useEffect(() => {
-    gsap.to(obj.current, {
+   
+  }, [target]);
+
+   useEffect(() => {
+      if (typeof window !== "undefined") {
+        (async () => {
+          const gsapModule = await import("gsap");
+          const { gsap } = gsapModule;
+  
+          const scrollModule = await import("gsap/ScrollTrigger");
+          const { ScrollTrigger } = scrollModule;
+          gsap.registerPlugin(ScrollTrigger);
+  
+          gsap.to(obj.current, {
       val: target,
       scrollTrigger: {
         trigger: circleRef.current,
@@ -25,7 +34,9 @@ const Circle = ({ target = 90, color = "blue" }) => {
       ease: "power1.out",
       onUpdate: () => setPercent(Math.round(obj.current.val)),
     });
-  }, [target]);
+        })();
+      }
+    }, []);
 
   return (
     <div
