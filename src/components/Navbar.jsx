@@ -90,7 +90,7 @@ const Navbar = () => {
         });
       } else {
         gsap.to(mobileMenuRef.current, {
-          x: "100%",
+           transform: "translateX(100%)",
           opacity: 0,
           duration: 0.3,
           ease: "power2.inOut",
