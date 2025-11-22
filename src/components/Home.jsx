@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <div
       id="home"
-      className="w-full h-[60vh] lg:h-screen pt-[10vh]  bg-cover bg-center bg-no-repeat"
+      className="w-full h-[60vh] lg:h-screen lg:pt-[10vh] pt-5  bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/images/bg.PNG')",
         borderBottomLeftRadius: "30% 10%",

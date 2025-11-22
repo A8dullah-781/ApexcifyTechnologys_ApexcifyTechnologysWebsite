@@ -9,9 +9,7 @@ const Circle = ({ target = 90, color = "blue" }) => {
   const circumference = 2 * Math.PI * radius;
   const progress = (percent / 100) * circumference;
 
-  useEffect(() => {
-   
-  }, [target]);
+ 
 
    useEffect(() => {
       if (typeof window !== "undefined") {
@@ -36,7 +34,7 @@ const Circle = ({ target = 90, color = "blue" }) => {
     });
         })();
       }
-    }, []);
+    }, [target]);
 
   return (
     <div

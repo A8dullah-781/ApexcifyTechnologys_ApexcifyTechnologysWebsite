@@ -148,8 +148,9 @@ const Navbar = () => {
 
       <div
         ref={mobileMenuRef}
-        className="fixed top-0 right-0 h-full w-[70%] bg-gray-900 flex flex-col items-center gap-4 px-6 py-20 md:hidden"
-        style={{ x: "100%", opacity: 0 }}
+        className="fixed top-0 right-0 h-screen w-[70%] bg-gray-900 flex flex-col items-center gap-4 px-6 py-20 md:hidden"
+        style={{ transform: "translateX(100%)", opacity: 0 }}
+
       >
         {links.map((link) => (
           <a
