@@ -83,7 +83,7 @@ const Navbar = () => {
      if (mobileMenuRef.current) {
       if (isOpen) {
         gsap.to(mobileMenuRef.current, {
-          x: 0,
+          transform: "translateX(0%)",
           opacity: 1,
           duration: 0.5,
           ease: "power2.out",
