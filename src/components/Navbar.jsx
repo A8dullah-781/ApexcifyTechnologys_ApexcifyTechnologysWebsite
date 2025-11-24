@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,44 +13,33 @@ const Navbar = () => {
   const [showNav, setShowNav] = useState(true);
   const lastScrollY = useRef(0);
 
-   useEffect(() => {
-  if (typeof window !== "undefined") {
-    import("gsap").then((gsapModule) => {
-      const gsap = gsapModule.gsap;
-      import("gsap/ScrollTrigger").then((scrollModule) => {
-        const ScrollTrigger = scrollModule.ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
+  // Desktop GSAP Animations
+  useEffect(() => {
+    if (!desktopLinksRef.current.length || !lineRef.current) return;
 
-        // Yaha pe animations define karo
-        if (desktopLinksRef.current.length && lineRef.current) {
-          const tl = gsap.timeline();
+    const tl = gsap.timeline();
 
-          tl.fromTo(
-            lineRef.current,
-            { scaleX: 0, transformOrigin: "center" },
-            { scaleX: 1, duration: 1, ease: "bounce.out" }
-          );
+    tl.fromTo(
+      lineRef.current,
+      { scaleX: 0, transformOrigin: "center" },
+      { scaleX: 1, duration: 1, ease: "bounce.out" }
+    );
 
-          tl.fromTo(
-            desktopLinksRef.current,
-            { y: -20, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              stagger: 0.1,
-              duration: 0.5,
-              ease: "bounce.out",
-            },
-            "-=0.3"
-          );
-        }
-      });
-    });
-  }
-}, []);
+    tl.fromTo(
+      desktopLinksRef.current,
+      { y: -20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "bounce.out",
+      },
+      "-=0.3"
+    );
+  }, []);
 
-
-
+  // Navbar scroll hide/show
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -61,7 +54,6 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -72,44 +64,23 @@ const Navbar = () => {
     { name: "Contact Us", id: "contact" },
   ];
 
+  // Mobile Menu Animation
   useEffect(() => {
-  if (typeof window !== "undefined") {
-    import("gsap").then((gsapModule) => {
-      const gsap = gsapModule.gsap;
-      import("gsap/ScrollTrigger").then((scrollModule) => {
-        const ScrollTrigger = scrollModule.ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
+    if (!mobileMenuRef.current) return;
 
-     if (mobileMenuRef.current) {
-      if (isOpen) {
-        gsap.to(mobileMenuRef.current, {
-          transform: "translateX(0%)",
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      } else {
-        gsap.to(mobileMenuRef.current, {
-           transform: "translateX(100%)",
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.inOut",
-        });
-      }
-    }
-      });
+    gsap.to(mobileMenuRef.current, {
+      x: isOpen ? 0 : "100%",
+      opacity: isOpen ? 1 : 0,
+      duration: 0.4,
+      ease: "power2.out",
     });
-  }
-}, [isOpen]);
-
-
-  
+  }, [isOpen]);
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300
-    ${showNav ? "translate-y-0" : "-translate-y-full"}
-    text-white px-5 md:px-10 py-3 flex justify-between items-center`}
+        ${showNav ? "translate-y-0" : "-translate-y-full"}
+        text-white px-5 md:px-10 py-3 flex justify-between items-center`}
     >
       <div
         ref={lineRef}
@@ -150,7 +121,6 @@ const Navbar = () => {
         ref={mobileMenuRef}
         className="fixed top-0 right-0 h-screen w-[70%] bg-gray-900 flex flex-col items-center gap-4 px-6 py-20 md:hidden"
         style={{ transform: "translateX(100%)", opacity: 0 }}
-
       >
         {links.map((link) => (
           <a
