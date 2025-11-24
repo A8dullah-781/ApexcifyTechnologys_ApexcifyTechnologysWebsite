@@ -1,34 +1,31 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap/dist/gsap";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
-  const mousePos = useRef({ x: 0, y: 0 });
-  const cursorPos = useRef({ x: 0, y: 0 });
+  const pos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const move = (e) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+      pos.current = { x: e.clientX, y: e.clientY };
     };
-
     window.addEventListener("mousemove", move);
 
-    const follow = () => {
-      cursorPos.current.x += (mousePos.current.x - cursorPos.current.x) * 0.18;
-      cursorPos.current.y += (mousePos.current.y - cursorPos.current.y) * 0.18;
-
+    const update = () => {
       if (cursorRef.current) {
-        cursorRef.current.style.left = cursorPos.current.x + "px";
-        cursorRef.current.style.top = cursorPos.current.y + "px";
+        gsap.to(cursorRef.current, {
+          x: pos.current.x,
+          y: pos.current.y,
+          duration: 0.15,
+          ease: "power2.out",
+        });
       }
-
-      requestAnimationFrame(follow);
+      requestAnimationFrame(update);
     };
 
-    follow();
+    update();
 
-    return () => {
-      window.removeEventListener("mousemove", move);
-    };
+    return () => window.removeEventListener("mousemove", move);
   }, []);
 
   return <div ref={cursorRef} className="custom-cursor"></div>;

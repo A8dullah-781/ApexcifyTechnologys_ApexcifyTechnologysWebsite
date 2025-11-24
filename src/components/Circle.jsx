@@ -1,4 +1,8 @@
 import { useEffect, useState, useRef } from "react";
+import gsap from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Circle = ({ target = 90, color = "blue" }) => {
   const [percent, setPercent] = useState(0);
@@ -9,19 +13,10 @@ const Circle = ({ target = 90, color = "blue" }) => {
   const circumference = 2 * Math.PI * radius;
   const progress = (percent / 100) * circumference;
 
- 
+  useEffect(() => {
+    if (!circleRef.current) return;
 
-   useEffect(() => {
-      if (typeof window !== "undefined") {
-        (async () => {
-          const gsapModule = await import("gsap");
-          const { gsap } = gsapModule;
-  
-          const scrollModule = await import("gsap/ScrollTrigger");
-          const { ScrollTrigger } = scrollModule;
-          gsap.registerPlugin(ScrollTrigger);
-  
-          gsap.to(obj.current, {
+    gsap.to(obj.current, {
       val: target,
       scrollTrigger: {
         trigger: circleRef.current,
@@ -32,22 +27,20 @@ const Circle = ({ target = 90, color = "blue" }) => {
       ease: "power1.out",
       onUpdate: () => setPercent(Math.round(obj.current.val)),
     });
-        })();
-      }
-    }, [target]);
+  }, [target]);
 
   return (
     <div
       ref={circleRef}
       className="
-    relative bg-white
-    w-[140px] h-[140px]
-    sm:w-[160px] sm:h-[160px]
-    md:w-[180px] md:h-[180px]
-    lg:w-[200px] lg:h-[200px]
-    xl:w-[220px] xl:h-[220px]
-    rounded-full
-  "
+        relative bg-white
+        w-[140px] h-[140px]
+        sm:w-[160px] sm:h-[160px]
+        md:w-[180px] md:h-[180px]
+        lg:w-[200px] lg:h-[200px]
+        xl:w-[220px] xl:h-[220px]
+        rounded-full
+      "
     >
       <svg
         width="100%"
@@ -80,10 +73,10 @@ const Circle = ({ target = 90, color = "blue" }) => {
 
       <div
         className="
-      absolute inset-0 flex justify-center items-center
-      text-[5vw] sm:text-[4vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw]
-      font-extrabold
-    "
+          absolute inset-0 flex justify-center items-center
+          text-[5vw] sm:text-[4vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw]
+          font-extrabold
+        "
       >
         {percent}%
       </div>
