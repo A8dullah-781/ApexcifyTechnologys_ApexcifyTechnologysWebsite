@@ -68,7 +68,7 @@ const Home = () => {
                 Empowering businesses with creative, reliable, and innovative
                 digital solutions that drive growth and lasting impact.
               </div>
-              <button id="contact" className="px-8 py-3 lg:text-[1.3vw] text-[3vw] lg:mt-7 mt-4 text-white cursor-none bg-blue-500 rounded-2xl transition duration-200 hover:shadow-[0_0_6px_#fff] hover:border-[#fff]">
+              <button className="px-8 py-3 lg:text-[1.3vw] text-[3vw] lg:mt-7 mt-4 text-white cursor-none bg-blue-500 rounded-2xl transition duration-200 hover:shadow-[0_0_6px_#fff] hover:border-[#fff]">
                 Get Started
               </button>
             </div>

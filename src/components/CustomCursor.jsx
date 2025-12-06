@@ -28,7 +28,7 @@ const CustomCursor = () => {
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
-  return <div ref={cursorRef} className="custom-cursor"></div>;
+  return <div ref={cursorRef} className="custom-cursor hidden lg:block"></div>;
 };
 
 export default CustomCursor;
